@@ -660,6 +660,20 @@ static int ntfs_volume_check_logfile(ntfs_volume *vol)
 		goto out;
 	}
 	
+	if (!ntfs_check_logfile(na, &rp) || !ntfs_is_logfile_clean(na, rp))
+		err = EOPNOTSUPP;
+		/*
+		 * If the latest restart page was identified as version
+		 * 2.0, then Windows may have kept a cached copy of
+		 * metadata for fast restarting, and we should not mount.
+		 * Hibernation will be seen the same way on a non
+		 * Windows-system partition, so we have to use the same
+		 * error code (EPERM).
+		 * The restart page may also be identified as version 2.0
+		 * when access to the file system is terminated abruptly
+		 * by unplugging or power cut, so mounting is also rejected
+		 * after such an event.
+		 */
 	if (rp
 	    && (rp->major_ver == const_cpu_to_le16(2))
 	    && (rp->minor_ver == const_cpu_to_le16(0))) {
