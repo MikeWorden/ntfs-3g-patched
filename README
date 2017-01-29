@@ -1,3 +1,8 @@
+WARNING!!!
+
+Do not use this version for production!  Test build used to support an academic project.   Some error-checking necessary for production have been removed.
+Specifically, libntfs/volume.c error checking has been removed.
+
 
 INTRODUCTION
 ============
