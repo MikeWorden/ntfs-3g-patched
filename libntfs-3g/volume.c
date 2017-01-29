@@ -659,7 +659,9 @@ static int ntfs_volume_check_logfile(ntfs_volume *vol)
 		err = EIO;
 		goto out;
 	}
-	
+
+//  Removed to allow for faster booting when hacking -- Dangerous option
+/*	
 	if (!ntfs_check_logfile(na, &rp) || !ntfs_is_logfile_clean(na, rp))
 		err = EOPNOTSUPP;
 		/*
@@ -680,6 +682,7 @@ static int ntfs_volume_check_logfile(ntfs_volume *vol)
 		ntfs_log_error("Metadata kept in Windows cache, refused to mount.\n");
 		err = EPERM;
 	}
+*/
 	free(rp);
 	ntfs_attr_close(na);
 out:	
