@@ -664,7 +664,7 @@ static int ntfs_volume_check_logfile(ntfs_volume *vol)
 /*	
 	if (!ntfs_check_logfile(na, &rp) || !ntfs_is_logfile_clean(na, rp))
 		err = EOPNOTSUPP;
-		/*
+		 *
 		 * If the latest restart page was identified as version
 		 * 2.0, then Windows may have kept a cached copy of
 		 * metadata for fast restarting, and we should not mount.
@@ -675,7 +675,7 @@ static int ntfs_volume_check_logfile(ntfs_volume *vol)
 		 * when access to the file system is terminated abruptly
 		 * by unplugging or power cut, so mounting is also rejected
 		 * after such an event.
-		 */
+		 * 
 	if (rp
 	    && (rp->major_ver == const_cpu_to_le16(2))
 	    && (rp->minor_ver == const_cpu_to_le16(0))) {
